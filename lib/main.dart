@@ -4,42 +4,43 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var a = 1;
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          child: Row(
-            children: [
-              Image.asset('camera.jpg', width: 150,),
-              Container(
-                width: 300,
-                child:  Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('카메라 팝니다.'),
-                    Text('금호동 3가'),
-                    Text('7000원'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(Icons.favorite),
-                        Text('4')
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+        floatingActionButton: FloatingActionButton(
+          child: Text(a.toString()),
+          onPressed: (){
+            setState(() {
+              a++;
+            });
+          },
         ),
+
+
+        appBar: AppBar(title: Text('연락처앱'),),
+        body: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (c, i){
+              return ListTile(
+                leading: Image.asset('profile.png'),
+                title: Text('홍길동'),
+              );
+          },
+        )
+
       )
     );
   }
 }
-
